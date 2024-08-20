@@ -3,16 +3,16 @@ from .basesegdataset import BaseSegDataset
 
 @DATASETS.register_module()
 class BuildingDataset(BaseSegDataset):
-    # 类别和对应的 RGB配色
+    # Category and corresponding RGB color scheme
     METAINFO = {
         'classes':['background', 'building'],
         'palette':[[0,0,0], [255,255,255]]
     }
     
-    # 指定图像扩展名、标注扩展名
+    # Specify image extension and annotation extension
     def __init__(self,
-                 seg_map_suffix='.png',   # 标注mask图像的格式
-                 reduce_zero_label=False, # 类别ID为0的类别是否需要除去
+                 seg_map_suffix='.png',   # Format of annotated mask images
+                 reduce_zero_label=False, # The category with category ID 0 be removed or not
                  **kwargs) -> None:
         super().__init__(
             seg_map_suffix=seg_map_suffix,

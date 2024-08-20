@@ -1,11 +1,11 @@
-# 数据集路径
-dataset_type = 'BuildingDataset' # 数据集类名
-data_root = 'dataset1_png/' # 数据集路径（相对于mmsegmentation主目录）
+# Dataset path
+dataset_type = 'BuildingDataset' # Dataset class name
+data_root = 'dataset1_png/' # Dataset path (relative to mmsegmentation home directory)
 
-# 输入模型的图像裁剪尺寸，一般是 128 的倍数，越小显存开销越少
+# The image cropping size of the input model is usually a multiple of 128. The smaller the size, the less memory overhead
 crop_size = (512, 512)
 
-# 训练预处理
+# Training preprocessing
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations'),
@@ -20,7 +20,7 @@ train_pipeline = [
     dict(type='PackSegInputs')
 ]
 
-# 测试预处理
+# Test preprocessing
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='Resize', scale=(2048, 1024), keep_ratio=True),
@@ -28,7 +28,7 @@ test_pipeline = [
     dict(type='PackSegInputs')
 ]
 
-# TTA后处理
+# TTA post-treatment
 img_ratios = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75]
 tta_pipeline = [
     dict(type='LoadImageFromFile', file_client_args=dict(backend='disk')),
@@ -46,7 +46,7 @@ tta_pipeline = [
         ])
 ]
 
-# 训练 Dataloader
+# Training Dataloader
 train_dataloader = dict(
     batch_size=2,
     num_workers=2,
@@ -59,7 +59,7 @@ train_dataloader = dict(
             img_path='img_dir/train', seg_map_path='ann_dir/train'),
         pipeline=train_pipeline))
 
-# 验证 Dataloader
+# Validation Dataloader
 val_dataloader = dict(
     batch_size=1,
     num_workers=4,
@@ -72,11 +72,11 @@ val_dataloader = dict(
             img_path='img_dir/val', seg_map_path='ann_dir/val'),
         pipeline=test_pipeline))
 
-# 测试 Dataloader
+# Test Dataloader
 test_dataloader = val_dataloader
 
-# 验证 Evaluator
+# Validation Evaluator
 val_evaluator = dict(type='IoUMetric', iou_metrics=['mIoU', 'mDice', 'mFscore'])
 
-# 测试 Evaluator
+# Test Evaluator
 test_evaluator = val_evaluator
