@@ -66,4 +66,4 @@ This folder contains the code for performing the unsupervised clustering analysi
 
 ## Acknowledgments
 
-This research was greatly facilitated by the resources and code made available by the above resources. We extend our thanks to the contributors of these projects.
+This research was greatly facilitated by the data and code made available by the above resources. We extend our thanks to the contributors of these projects.
